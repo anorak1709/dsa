@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int count = 0;
+        int length = sizeof(nums)/sizeof(nums[0]);
+        for (int i = 0; i < nums.size(); i++){
+            if (nums[i] != val){
+                nums[count] = nums[i];
+                count++;
+            }
+        }
+        return count;
+    }
+};
+
+.size() is used to find out the length of the vector 
+in this code we shift the value instead of directly deleting it 
