@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        int t = 0;
+        int og = x;
+        string newstr = to_string(og);
+        while ( x > 0){
+            int digit = x%10;
+            if (t > INT_MAX / 10 || (t == INT_MAX / 10 && digit > 7)) return 0;
+            if (t < INT_MIN / 10 || (t == INT_MIN / 10 && digit < -8)) return 0;
+            t = t * 10 + digit;
+            x = x/10;
+        }
+        string oldstr = to_string(t);
+        if (oldstr == newstr){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+};
