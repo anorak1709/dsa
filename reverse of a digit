@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int reverse(int x){
+        int t = 0;
+        while (x != 0){
+            int digit = x%10;
+            if (t > INT_MAX / 10 || (t == INT_MAX / 10 && digit > 7)) return 0;     check for underflow and overflow 
+            if (t < INT_MIN / 10 || (t == INT_MIN / 10 && digit < -8)) return 0;
+            t = t*10 + digit;
+            x = x/10;
+        }
+        return t;
+    }
+};
+
+
+t > INT_MAX / 10:
+If t is already larger than 214748364, then t * 10 + digit will definitely overflow.
+
+t == INT_MAX / 10 && digit > 7:
+If t is exactly 214748364, we must ensure the last digit added is ≤ 7,
+because INT_MAX ends in 7.
+If digit > 7, it would become greater than INT_MAX, so we return 0.
+
+t < INT_MIN / 10:
+If t is smaller than -214748364, then multiplying and adding a digit will underflow.
+
+t == INT_MIN / 10 && digit < -8:
+If t is -214748364, we must ensure the last digit is ≥ -8
+because INT_MIN ends in -8.
